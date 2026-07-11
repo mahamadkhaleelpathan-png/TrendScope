@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrendScope – Presentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  .slide {
+    width: 800px;
+    min-height: 450px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    padding: 50px 60px;
+    margin-bottom: 40px;
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .slide h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a73e8;
+    margin-bottom: 8px;
+  }
+  .slide h2 {
+    font-size: 22px;
+    font-weight: 400;
+    color: #444;
+    margin-bottom: 30px;
+  }
+  .slide h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .slide p, .slide li {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+  }
+  .slide ul {
+    list-style: none;
+    padding: 0;
+  }
+  .slide ul li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+  }
+  .slide ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #1a73e8;
+    font-weight: 700;
+  }
+  .slide .meta {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #999;
+  }
+  .slide .badge {
+    display: inline-block;
+    background: #e8f0fe;
+    color: #1a73e8;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  .title-slide { text-align: center; }
+  .title-slide h1 { font-size: 44px; margin-bottom: 16px; }
+  .title-slide h2 { font-size: 24px; color: #666; margin-bottom: 20px; }
+  .title-slide .badge-row { margin-top: 30px; }
+  .col2 { display: flex; gap: 40px; }
+  .col2 > div { flex: 1; }
+  .checkbox { color: #1a73e8; font-size: 22px; margin-right: 8px; }
+  @media print {
+    body { background: white; padding: 0; }
+    .slide { box-shadow: none; border-radius: 0; page-break-after: always; margin: 0; width: 100%; min-height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 -->
+<div class="slide title-slide">
+  <h1>TrendScope</h1>
+  <h2>Offline-First News Reader</h2>
+  <p style="font-size:18px;color:#666;">Android News Aggregator with RSS, Translation,<br>Bookmarks &amp; Offline Support</p>
+  <div class="badge-row">
+    <span class="badge">Kotlin</span>
+    <span class="badge">Room DB</span>
+    <span class="badge">Coroutines</span>
+    <span class="badge">Material 3</span>
+  </div>
+  <div class="meta">Team Lead Review — July 2026</div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide">
+  <h3>Problem Statement</h3>
+  <h1>Challenge</h1>
+  <p style="font-size:22px;line-height:1.7;color:#333;">Users need a single app that aggregates diverse news sources, supports Indian regional languages, works offline, and lets them save &amp; bookmark articles — all with a clean, modern UI.</p>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide">
+  <h3>Architecture Overview</h3>
+  <h1>Tech Stack</h1>
+  <div class="col2">
+    <div>
+      <ul>
+        <li>Kotlin + Room (SQLite)</li>
+        <li>Coroutines + Dispatchers</li>
+        <li>MVVM-like separation</li>
+        <li>Activities ↔ DAO ↔ RSS Parser</li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li>Material Design 3</li>
+        <li>DayNight theming</li>
+        <li>R8 minification</li>
+        <li>ViewBinding</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:20px;"><strong>Key patterns:</strong> Parallel RSS fetch (Semaphore 8), OkHttp image caching, <code>OnConflictStrategy.IGNORE</code> for bookmark safety</p>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide">
+  <h3>Key Feature</h3>
+  <h1>Multi-Source RSS Aggregation</h1>
+  <ul>
+    <li>100+ RSS feeds across Indian news categories (Tech, Business, Sports, etc.)</li>
+    <li>Atom + RSS 2.0 parsing with per-feed 25s timeout</li>
+    <li>Concurrent fetch capped at 8 simultaneous feeds via Semaphore</li>
+    <li>Self-heals: 100ms retry on failure, individual feed errors don't block others</li>
+    <li>Deduplication by article link; max 200 articles per refresh</li>
+  </ul>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide">
+  <h3>Key Feature</h3>
+  <h1>Translation Engine</h1>
+  <ul>
+    <li>22 Indian languages supported (Hindi, Bengali, Tamil, Telugu, etc.)</li>
+    <li>Batch translation with 400ms delays to avoid rate limiting</li>
+    <li>Per-article cached translations stored in Room</li>
+    <li>Source-language auto-detection; user picks any target language</li>
+    <li>Swap source ↔ target with one tap</li>
+    <li>Progress tracking: "Translating (3/15)…"</li>
+  </ul>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide">
+  <h3>Key Feature</h3>
+  <h1>Offline News Download</h1>
+  <ul>
+    <li>One-tap download caches <strong>article + image</strong> locally</li>
+    <li><code>ImageCacheManager</code> stores images as MD5-hashed JPEGs in <code>filesDir/offline_images/</code></li>
+    <li>Dedicated <strong>Offline tab</strong> (tab 2) lists all saved articles</li>
+    <li>Offline banner auto-shows when <code>ConnectivityManager</code> reports no internet</li>
+    <li>Delete with confirmation dialog frees storage</li>
+    <li>Search works on offline articles too</li>
+  </ul>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide">
+  <h3>Key Feature</h3>
+  <h1>Bookmarks</h1>
+  <ul>
+    <li>Bookmarks persisted via Room with <code>OnConflictStrategy.IGNORE</code> — never clobbered by RSS refresh</li>
+    <li><code>toggleBookmark()</code> uses single atomic <code>insertArticle()</code> — no TOCTOU race condition</li>
+    <li>Dedicated <strong>Bookmarks tab</strong> (tab 1)</li>
+    <li>Star icon (filled/empty) on every article detail screen</li>
+  </ul>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide">
+  <h3>Key Feature</h3>
+  <h1>Search &amp; Filters</h1>
+  <ul>
+    <li>Full-text search across all cached articles</li>
+    <li>Advanced Search dialog: keyword, category filter, date range, newest/oldest sort</li>
+    <li>Search history persisted (last 20 queries)</li>
+    <li>Filter chips for quick refinement</li>
+  </ul>
+</div>
+
+<!-- SLIDE 9 -->
+<div class="slide">
+  <h3>UI / UX</h3>
+  <h1>Dark Mode &amp; UI Details</h1>
+  <ul>
+    <li>Light / Dark toggle in toolbar overflow menu — persisted in SharedPreferences</li>
+    <li><code>DayNight.NoActionBar</code> theme with custom <code>values-night/colors.xml</code></li>
+    <li>Breaking-news badge (articles &lt;60 min old)</li>
+    <li>Day-based section headers (Today / Yesterday / This Week / This Month / Earlier)</li>
+    <li>Favicon per news source, author display, share button</li>
+  </ul>
+</div>
+
+<!-- SLIDE 10 -->
+<div class="slide">
+  <h3>Looking Ahead</h3>
+  <h1>Roadmap &amp; Next Steps</h1>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
+    <span class="badge" style="background:#1a73e8;color:white;">Done</span>
+    <span class="badge" style="background:#e8f0fe;">Planned</span>
+  </div>
+  <ul>
+    <li><span class="checkbox">✓</span> RSS aggregation (100+ feeds)</li>
+    <li><span class="checkbox">✓</span> 22-language translation</li>
+    <li><span class="checkbox">✓</span> Offline download with image caching</li>
+    <li><span class="checkbox">✓</span> Bookmarks, search, dark mode</li>
+  </ul>
+  <ul style="margin-top:12px;">
+    <li><span class="checkbox" style="color:#999;">☐</span> Push notifications for breaking news</li>
+    <li><span class="checkbox" style="color:#999;">☐</span> Background sync via WorkManager</li>
+    <li><span class="checkbox" style="color:#999;">☐</span> Bookmark folders / categories</li>
+    <li><span class="checkbox" style="color:#999;">☐</span> Tablet / landscape layout</li>
+  </ul>
+  <p style="margin-top:20px;font-size:15px;color:#999;">~4K LOC · Single module · Clean Room schema · Passes R8 minification</p>
+</div>
+
+</body>
+</html>

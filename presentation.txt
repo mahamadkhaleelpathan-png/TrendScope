@@ -1,0 +1,85 @@
+TrendScope – Offline-First News Reader
+=======================================
+10-Slide Deck for Team Lead Review
+July 2026
+
+=======================================
+SLIDE 1 – Title
+=======================================
+TrendScope – Offline-First News Reader
+Android News Aggregator with RSS, Translation, Bookmarks & Offline Support
+Team Lead Review — July 2026
+
+=======================================
+SLIDE 2 – Problem Statement
+=======================================
+Challenge: Users need a single app that aggregates diverse news sources, supports Indian regional languages, works offline, and lets them save/bookmark articles — all with a clean, modern UI.
+
+=======================================
+SLIDE 3 – Architecture Overview
+=======================================
+Tech Stack:
+- Kotlin + Room (SQLite) + Coroutines
+- MVVM-like separation (Activities ↔ DAO ↔ RSS Parser)
+- Material Design 3 with DayNight theming
+- Key patterns: Parallel RSS fetch (Semaphore 8), OkHttp image caching, IGNORE-based bookmark preservation
+
+=======================================
+SLIDE 4 – Key Feature: Multi-Source RSS Aggregation
+=======================================
+- 100+ RSS feeds across Indian news categories (Tech, Business, Sports, etc.)
+- Atom + RSS 2.0 parsing with per-feed 25s timeout
+- Concurrent fetch capped at 8 simultaneous feeds
+- Self-heals: 100ms retry on failure, individual feed errors don't block others
+
+=======================================
+SLIDE 5 – Key Feature: Translation Engine
+=======================================
+- 22 Indian languages supported via remote translation API
+- Batch translation with 400ms delays to avoid rate limiting
+- Per-article cached translations stored in Room
+- Source-language auto-detection; user picks any target language
+- Swap source ↔ target with one tap
+
+=======================================
+SLIDE 6 – Key Feature: Offline News Download
+=======================================
+- One-tap download caches article + image locally
+- ImageCacheManager stores images as MD5-hashed JPEGs in filesDir/offline_images/
+- Dedicated Offline tab (tab 2) lists all saved articles
+- Offline banner auto-shows when ConnectivityManager reports no internet
+- Delete with confirmation dialog frees storage
+
+=======================================
+SLIDE 7 – Key Feature: Bookmarks
+=======================================
+- Bookmarks persisted via Room with OnConflictStrategy.IGNORE (never clobbered by RSS refresh)
+- ArticleActivity.toggleBookmark() uses single atomic insertArticle() — no TOCTOU race
+- Dedicated Bookmarks tab (tab 1)
+- Star icon (filled/empty) on every article detail screen
+
+=======================================
+SLIDE 8 – Key Feature: Search & Filters
+=======================================
+- Full-text search across all cached articles
+- Advanced Search dialog: keyword, category filter, date range, newest/oldest sort
+- Search history persisted (last 20 queries)
+- Filter chips for quick refinement
+
+=======================================
+SLIDE 9 – Dark Mode & UI
+=======================================
+- Light / Dark toggle in toolbar overflow menu — persisted in SharedPreferences
+- DayNight.NoActionBar theme with custom values-night/colors.xml
+- Breaking-news badge (articles <60 min old)
+- Day-based section headers (Today / Yesterday / This Week / This Month / Earlier)
+
+=======================================
+SLIDE 10 – Roadmap & Next Steps
+=======================================
+- [ ] Push notifications for breaking news
+- [ ] Background sync / periodic refresh via WorkManager
+- [ ] Multiple-bookmark folders
+- [ ] Tablet / landscape layout optimization
+- [ ] App shortcuts for top categories
+- Codebase: ~4K LOC Kotlin, single-module, clean Room schema, passes R8 minification cleanly

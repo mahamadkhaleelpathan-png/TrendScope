@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ട്രെൻഡ്സ്കോപ്പ്</string>
+    <string name="tab_categories">വിഭാഗങ്ങൾ</string>
+    <string name="tab_bookmarks">ബുക്മാർക്കുകൾ</string>
+    <string name="search_hint">ലേഖനങ്ങൾ തിരയുക…</string>
+    <string name="today">ഇന്ന്</string>
+    <string name="yesterday">ഇന്നലെ</string>
+    <string name="this_week">ഈ ആഴ്ച</string>
+    <string name="this_month">ഈ മാസം</string>
+    <string name="earlier">മുമ്പ്</string>
+    <string name="open_original">യഥാർത്ഥ ലേഖനം തുറക്കുക</string>
+    <string name="no_bookmarks">ഇതുവരെ ബുക്മാർക്കുകളൊന്നുമില്ല</string>
+    <string name="bookmarked">ബുക്മാർക്ക് ചെയ്തു</string>
+    <string name="removed_bookmark">ബുക്മാർക്ക് നീക്കം ചെയ്തു</string>
+    <string name="select_language">ഭാഷ തിരഞ്ഞെടുക്കുക</string>
+    <string name="language">ഭാഷ</string>
+    <string name="status_starting">ആരംഭിക്കുന്നു…</string>
+    <string name="status_fetching">ശേഖരിക്കുന്നു</string>
+    <string name="status_downloading_model">ഭാഷാ മോഡൽ ഡൗൺലോഡ് ചെയ്യുന്നു…</string>
+    <string name="status_translating">ലേഖനങ്ങൾ വിവർത്തനം ചെയ്യുന്നു…</string>
+    <string name="status_translating_count">വിവർത്തനം ചെയ്യുന്നു (%1$d/%2$d)…</string>
+    <string name="translation_complete">വിവർത്തനം പൂർത്തിയായി!</string>
+    <string name="translation_partial">ചില ലേഖനങ്ങൾ വിവർത്തനം ചെയ്യാൻ കഴിഞ്ഞില്ല</string>
+    <string name="loading_articles">%1$d ലേഖനങ്ങൾ ലോഡ് ചെയ്തു</string>
+    <string name="tab_offline">ഓഫ്‌ലൈൻ</string>
+    <string name="download">ഡൗൺലോഡ്</string>
+    <string name="downloaded">ഡൗൺലോഡ് ചെയ്തു</string>
+    <string name="download_started">ലേഖനം ഡൗൺലോഡ് ചെയ്യുന്നു…</string>
+    <string name="download_complete">ഡൗൺലോഡ് പൂർത്തിയായി</string>
+    <string name="download_failed">ഡൗൺലോഡ് പരാജയപ്പെട്ടു</string>
+    <string name="delete_offline_title">ഓഫ്‌ലൈൻ പകർപ്പ് ഇല്ലാതാക്കുക</string>
+    <string name="delete_offline_message">ഈ ലേഖനം ഓഫ്‌ലൈൻ സംഭരണത്തിൽ നിന്ന് നീക്കം ചെയ്യണോ?</string>
+    <string name="offline_copy_deleted">ഓഫ്‌ലൈൻ പകർപ്പ് ഇല്ലാതാക്കി</string>
+    <string name="offline_banner">ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ല — ഓഫ്‌ലൈൻ ലേഖനങ്ങൾ കാണിക്കുന്നു</string>
+    <string name="empty_offline">ഓഫ്‌ലൈൻ ലേഖനങ്ങളൊന്നുമില്ല. ഓഫ്‌ലൈനിൽ വായിക്കാൻ ലേഖനങ്ങൾ ഡൗൺലോഡ് ചെയ്യുക.</string>
+    <string name="offline_mode">ഓഫ്‌ലൈൻ മോഡ്</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ટ્રેન્ડસ્કોપ</string>
+    <string name="tab_categories">શ્રેણીઓ</string>
+    <string name="tab_bookmarks">બુકમાર્ક્સ</string>
+    <string name="search_hint">લેખો શોધો…</string>
+    <string name="today">આજે</string>
+    <string name="yesterday">ગઈકાલે</string>
+    <string name="this_week">આ અઠવાડિયે</string>
+    <string name="this_month">આ મહિને</string>
+    <string name="earlier">પહેલાં</string>
+    <string name="open_original">મૂળ લેખ ખોલો</string>
+    <string name="no_bookmarks">હજી સુધી કોઈ બુકમાર્ક નથી</string>
+    <string name="bookmarked">બુકમાર્ક કર્યું</string>
+    <string name="removed_bookmark">બુકમાર્ક દૂર કર્યું</string>
+    <string name="select_language">ભાષા પસંદ કરો</string>
+    <string name="language">ભાષા</string>
+    <string name="status_starting">શરૂ થાય છે…</string>
+    <string name="status_fetching">લાવવામાં આવે છે</string>
+    <string name="status_downloading_model">ભાષા મોડેલ ડાઉનલોડ થાય છે…</string>
+    <string name="status_translating">લેખોનો અનુવાદ થાય છે…</string>
+    <string name="status_translating_count">અનુવાદ કરે છે (%1$d/%2$d)…</string>
+    <string name="translation_complete">અનુવાદ પૂર્ણ!</string>
+    <string name="translation_partial">કેટલાક લેખોનો અનુવાદ કરી શકાયો નથી</string>
+    <string name="loading_articles">%1$d લેખો લોડ થયા</string>
+    <string name="tab_offline">ઑફલાઇન</string>
+    <string name="download">ડાઉનલોડ</string>
+    <string name="downloaded">ડાઉનલોડ થયું</string>
+    <string name="download_started">લેખ ડાઉનલોડ થાય છે…</string>
+    <string name="download_complete">ડાઉનલોડ પૂર્ણ</string>
+    <string name="download_failed">ડાઉનલોડ નિષ્ફળ</string>
+    <string name="delete_offline_title">ઑફલાઇન કૉપિ કાઢી નાખો</string>
+    <string name="delete_offline_message">શું આ લેખને ઑફલાઇન સ્ટોરેજમાંથી દૂર કરવો છે?</string>
+    <string name="offline_copy_deleted">ઑફલાઇન કૉપિ કાઢી નાખી</string>
+    <string name="offline_banner">ઇન્ટરનેટ કનેક્શન નથી — ઑફલાઇન લેખો બતાવી રહ્યું છે</string>
+    <string name="empty_offline">કોઈ ઑફલાઇન લેખો નથી. ઑફલાઇન વાંચવા માટે લેખો ડાઉનલોડ કરો.</string>
+    <string name="offline_mode">ઑફલાઇન મોડ</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>

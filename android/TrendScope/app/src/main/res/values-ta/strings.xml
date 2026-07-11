@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ட்ரெண்ட்ஸ்கோப்</string>
+    <string name="tab_categories">வகைகள்</string>
+    <string name="tab_bookmarks">புக்மார்க்குகள்</string>
+    <string name="search_hint">கட்டுரைகளைத் தேடுங்கள்…</string>
+    <string name="today">இன்று</string>
+    <string name="yesterday">நேற்று</string>
+    <string name="this_week">இந்த வாரம்</string>
+    <string name="this_month">இந்த மாதம்</string>
+    <string name="earlier">முன்பு</string>
+    <string name="open_original">அசல் கட்டுரையைத் திற</string>
+    <string name="no_bookmarks">இதுவரை புக்மார்க்குகள் இல்லை</string>
+    <string name="bookmarked">புக்மார்க் செய்யப்பட்டது</string>
+    <string name="removed_bookmark">புக்மார்க் அகற்றப்பட்டது</string>
+    <string name="select_language">மொழியைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="language">மொழி</string>
+    <string name="status_starting">தொடங்குகிறது…</string>
+    <string name="status_fetching">பெறுகிறது</string>
+    <string name="status_downloading_model">மொழி மாதிரி பதிவிறக்கப்படுகிறது…</string>
+    <string name="status_translating">கட்டுரைகள் மொழிபெயர்க்கப்படுகின்றன…</string>
+    <string name="status_translating_count">மொழிபெயர்க்கிறது (%1$d/%2$d)…</string>
+    <string name="translation_complete">மொழிபெயர்ப்பு முடிந்தது!</string>
+    <string name="translation_partial">சில கட்டுரைகளை மொழிபெயர்க்க முடியவில்லை</string>
+    <string name="loading_articles">%1$d கட்டுரைகள் ஏற்றப்பட்டன</string>
+    <string name="tab_offline">ஆஃப்லைன்</string>
+    <string name="download">பதிவிறக்கம்</string>
+    <string name="downloaded">பதிவிறக்கம் செய்யப்பட்டது</string>
+    <string name="download_started">கட்டுரை பதிவிறக்கப்படுகிறது…</string>
+    <string name="download_complete">பதிவிறக்கம் முடிந்தது</string>
+    <string name="download_failed">பதிவிறக்கம் தோல்வியடைந்தது</string>
+    <string name="delete_offline_title">ஆஃப்லைன் நகலை நீக்கு</string>
+    <string name="delete_offline_message">இந்தக் கட்டுரையை ஆஃப்லைன் சேமிப்பிலிருந்து அகற்றவா?</string>
+    <string name="offline_copy_deleted">ஆஃப்லைன் நகல் நீக்கப்பட்டது</string>
+    <string name="offline_banner">இணைய இணைப்பு இல்லை — ஆஃப்லைன் கட்டுரைகளைக் காட்டுகிறது</string>
+    <string name="empty_offline">ஆஃப்லைன் கட்டுரைகள் இல்லை. ஆஃப்லைனில் படிக்க கட்டுரைகளைப் பதிவிறக்கவும்.</string>
+    <string name="offline_mode">ஆஃப்லைன் முறை</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>

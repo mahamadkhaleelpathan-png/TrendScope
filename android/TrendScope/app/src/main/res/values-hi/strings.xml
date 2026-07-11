@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ट्रेंडस्कोप</string>
+    <string name="tab_categories">श्रेणियाँ</string>
+    <string name="tab_bookmarks">बुकमार्क</string>
+    <string name="search_hint">लेख खोजें…</string>
+    <string name="today">आज</string>
+    <string name="yesterday">कल</string>
+    <string name="this_week">इस सप्ताह</string>
+    <string name="this_month">इस महीने</string>
+    <string name="earlier">पहले</string>
+    <string name="open_original">मूल लेख खोलें</string>
+    <string name="no_bookmarks">अभी तक कोई बुकमार्क नहीं</string>
+    <string name="bookmarked">बुकमार्क किया गया</string>
+    <string name="removed_bookmark">बुकमार्क हटा दिया गया</string>
+    <string name="select_language">भाषा चुनें</string>
+    <string name="language">भाषा</string>
+    <string name="status_starting">शुरू हो रहा है…</string>
+    <string name="status_fetching">लाया जा रहा है</string>
+    <string name="status_downloading_model">भाषा मॉडल डाउनलोड हो रहा है…</string>
+    <string name="status_translating">लेखों का अनुवाद हो रहा है…</string>
+    <string name="status_translating_count">अनुवाद हो रहा है (%1$d/%2$d)…</string>
+    <string name="translation_complete">अनुवाद पूर्ण!</string>
+    <string name="translation_partial">कुछ लेखों का अनुवाद नहीं हो सका</string>
+    <string name="loading_articles">%1$d लेख लोड हुए</string>
+    <string name="tab_offline">ऑफ़लाइन</string>
+    <string name="download">डाउनलोड</string>
+    <string name="downloaded">डाउनलोड किया गया</string>
+    <string name="download_started">लेख डाउनलोड हो रहा है…</string>
+    <string name="download_complete">डाउनलोड पूर्ण</string>
+    <string name="download_failed">डाउनलोड विफल</string>
+    <string name="delete_offline_title">ऑफ़लाइन कॉपी हटाएँ</string>
+    <string name="delete_offline_message">क्या इस लेख को ऑफ़लाइन संग्रहण से हटा दें?</string>
+    <string name="offline_copy_deleted">ऑफ़लाइन कॉपी हटा दी गई</string>
+    <string name="offline_banner">कोई इंटरनेट कनेक्शन नहीं — ऑफ़लाइन लेख दिखाए जा रहे हैं</string>
+    <string name="empty_offline">कोई ऑफ़लाइन लेख नहीं। ऑफ़लाइन पढ़ने के लिए लेख डाउनलोड करें।</string>
+    <string name="offline_mode">ऑफ़लाइन मोड</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>

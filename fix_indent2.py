@@ -1,0 +1,6 @@
+﻿t = open("main.py","r",encoding="utf-8").read()
+t = t.replace("self.lang_combo.pack(fill=" + chr(34) + "x" + chr(34) + ", padx=20, pady=(0, 15))", "        self.lang_combo.pack(fill=" + chr(34) + "x" + chr(34) + ", padx=20, pady=(0, 15))")
+t = t.replace("self.lang_combo.set(" + chr(34) + "English" + chr(34) + ")", "        self.lang_combo.set(" + chr(34) + "English" + chr(34) + ")")
+t = t.replace("                        tk.Label(center_panel, text=" + chr(34) + "Deep Filter", "        tk.Label(center_panel, text=" + chr(34) + "Deep Filter")
+open("main.py","w",encoding="utf-8").write(t)
+print("FIXED")

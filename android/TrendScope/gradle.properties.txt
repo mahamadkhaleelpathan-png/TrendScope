@@ -1,0 +1,3 @@
+keystoreStorePassword=Khaleel@141552
+keystoreKeyPassword=Khaleel@141552
+keystoreKeyAlias=trendscope

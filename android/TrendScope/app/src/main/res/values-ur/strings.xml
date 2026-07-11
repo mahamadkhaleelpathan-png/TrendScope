@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ٹرینڈسکوپ</string>
+    <string name="tab_categories">زمرے</string>
+    <string name="tab_bookmarks">بک مارکس</string>
+    <string name="search_hint">مضامین تلاش کریں…</string>
+    <string name="today">آج</string>
+    <string name="yesterday">کل</string>
+    <string name="this_week">اس ہفتے</string>
+    <string name="this_month">اس مہینے</string>
+    <string name="earlier">پہلے</string>
+    <string name="open_original">اصل مضمون کھولیں</string>
+    <string name="no_bookmarks">ابھی تک کوئی بک مارک نہیں</string>
+    <string name="bookmarked">بک مارک کیا گیا</string>
+    <string name="removed_bookmark">بک مارک ہٹا دیا گیا</string>
+    <string name="select_language">زبان منتخب کریں</string>
+    <string name="language">زبان</string>
+    <string name="status_starting">شروع ہو رہا ہے…</string>
+    <string name="status_fetching">لا رہا ہے</string>
+    <string name="status_downloading_model">زبان ماڈل ڈاؤن لوڈ ہو رہا ہے…</string>
+    <string name="status_translating">مضامین کا ترجمہ کیا جا رہا ہے…</string>
+    <string name="status_translating_count">ترجمہ ہو رہا ہے (%1$d/%2$d)…</string>
+    <string name="translation_complete">ترجمہ مکمل!</string>
+    <string name="translation_partial">کچھ مضامین کا ترجمہ نہیں ہو سکا</string>
+    <string name="loading_articles">%1$d مضامین لوڈ ہوئے</string>
+    <string name="tab_offline">آف لائن</string>
+    <string name="download">ڈاؤن لوڈ کریں</string>
+    <string name="downloaded">ڈاؤن لوڈ ہوگیا</string>
+    <string name="download_started">مضمون ڈاؤن لوڈ ہو رہا ہے…</string>
+    <string name="download_complete">ڈاؤن لوڈ مکمل</string>
+    <string name="download_failed">ڈاؤن لوڈ ناکام</string>
+    <string name="delete_offline_title">آف لائن کاپی حذف کریں</string>
+    <string name="delete_offline_message">کیا اس مضمون کو آف لائن اسٹوریج سے ہٹا دیں؟</string>
+    <string name="offline_copy_deleted">آف لائن کاپی حذف کر دی گئی</string>
+    <string name="offline_banner">انٹرنیٹ کنکشن نہیں — آف لائن مضامین دکھائے جا رہے ہیں</string>
+    <string name="empty_offline">کوئی آف لائن مضمون نہیں۔ آف لائن پڑھنے کے لیے مضامین ڈاؤن لوڈ کریں۔</string>
+    <string name="offline_mode">آف لائن موڈ</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>

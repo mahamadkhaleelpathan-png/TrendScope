@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ট্রেন্ডস্কোপ</string>
+    <string name="tab_categories">বিভাগ</string>
+    <string name="tab_bookmarks">বুকমার্ক</string>
+    <string name="search_hint">নিবন্ধ অনুসন্ধান…</string>
+    <string name="today">আজ</string>
+    <string name="yesterday">গতকাল</string>
+    <string name="this_week">এই সপ্তাহ</string>
+    <string name="this_month">এই মাস</string>
+    <string name="earlier">আগে</string>
+    <string name="open_original">মূল নিবন্ধ খুলুন</string>
+    <string name="no_bookmarks">এখনো কোনো বুকমার্ক নেই</string>
+    <string name="bookmarked">বুকমার্ক করা হয়েছে</string>
+    <string name="removed_bookmark">বুকমার্ক সরানো হয়েছে</string>
+    <string name="select_language">ভাষা নির্বাচন</string>
+    <string name="language">ভাষা</string>
+    <string name="status_starting">শুরু হচ্ছে…</string>
+    <string name="status_fetching">আনা হচ্ছে</string>
+    <string name="status_downloading_model">ভাষা মডেল ডাউনলোড হচ্ছে…</string>
+    <string name="status_translating">নিবন্ধ অনুবাদ করা হচ্ছে…</string>
+    <string name="status_translating_count">অনুবাদ করা হচ্ছে (%1$d/%2$d)…</string>
+    <string name="translation_complete">অনুবাদ সম্পূর্ণ!</string>
+    <string name="translation_partial">কিছু নিবন্ধ অনুবাদ করা যায়নি</string>
+    <string name="loading_articles">%1$dটি নিবন্ধ লোড হয়েছে</string>
+    <string name="tab_offline">অফলাইন</string>
+    <string name="download">ডাউনলোড</string>
+    <string name="downloaded">ডাউনলোড করা হয়েছে</string>
+    <string name="download_started">নিবন্ধ ডাউনলোড হচ্ছে…</string>
+    <string name="download_complete">ডাউনলোড সম্পূর্ণ</string>
+    <string name="download_failed">ডাউনলোড ব্যর্থ</string>
+    <string name="delete_offline_title">অফলাইন কপি মুছুন</string>
+    <string name="delete_offline_message">এই নিবন্ধটি অফলাইন স্টোরেজ থেকে সরিয়ে ফেলবেন?</string>
+    <string name="offline_copy_deleted">অফলাইন কপি মুছে ফেলা হয়েছে</string>
+    <string name="offline_banner">ইন্টারনেট সংযোগ নেই — অফলাইন নিবন্ধ দেখানো হচ্ছে</string>
+    <string name="empty_offline">কোনো অফলাইন নিবন্ধ নেই। অফলাইনে পড়ার জন্য নিবন্ধ ডাউনলোড করুন।</string>
+    <string name="offline_mode">অফলাইন মোড</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>

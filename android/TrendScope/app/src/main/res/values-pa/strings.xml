@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ਟ੍ਰੈਂਡਸਕੋਪ</string>
+    <string name="tab_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
+    <string name="tab_bookmarks">ਬੁੱਕਮਾਰਕ</string>
+    <string name="search_hint">ਲੇਖ ਖੋਜੋ…</string>
+    <string name="today">ਅੱਜ</string>
+    <string name="yesterday">ਕੱਲ੍ਹ</string>
+    <string name="this_week">ਇਸ ਹਫ਼ਤੇ</string>
+    <string name="this_month">ਇਸ ਮਹੀਨੇ</string>
+    <string name="earlier">ਪਹਿਲਾਂ</string>
+    <string name="open_original">ਅਸਲੀ ਲੇਖ ਖੋਲ੍ਹੋ</string>
+    <string name="no_bookmarks">ਅਜੇ ਤੱਕ ਕੋਈ ਬੁੱਕਮਾਰਕ ਨਹੀਂ</string>
+    <string name="bookmarked">ਬੁੱਕਮਾਰਕ ਕੀਤਾ</string>
+    <string name="removed_bookmark">ਬੁੱਕਮਾਰਕ ਹਟਾ ਦਿੱਤਾ</string>
+    <string name="select_language">ਭਾਸ਼ਾ ਚੁਣੋ</string>
+    <string name="language">ਭਾਸ਼ਾ</string>
+    <string name="status_starting">ਸ਼ੁਰੂ ਹੋ ਰਿਹਾ ਹੈ…</string>
+    <string name="status_fetching">ਲਿਆਂਦਾ ਜਾ ਰਿਹਾ ਹੈ</string>
+    <string name="status_downloading_model">ਭਾਸ਼ਾ ਮਾਡਲ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…</string>
+    <string name="status_translating">ਲੇਖਾਂ ਦਾ ਅਨੁਵਾਦ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…</string>
+    <string name="status_translating_count">ਅਨੁਵਾਦ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ (%1$d/%2$d)…</string>
+    <string name="translation_complete">ਅਨੁਵਾਦ ਪੂਰਾ!</string>
+    <string name="translation_partial">ਕੁਝ ਲੇਖਾਂ ਦਾ ਅਨੁਵਾਦ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ</string>
+    <string name="loading_articles">%1$d ਲੇਖ ਲੋਡ ਹੋਏ</string>
+    <string name="tab_offline">ਆਫਲਾਈਨ</string>
+    <string name="download">ਡਾਊਨਲੋਡ</string>
+    <string name="downloaded">ਡਾਊਨਲੋਡ ਕੀਤਾ</string>
+    <string name="download_started">ਲੇਖ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…</string>
+    <string name="download_complete">ਡਾਊਨਲੋਡ ਪੂਰਾ</string>
+    <string name="download_failed">ਡਾਊਨਲੋਡ ਅਸਫਲ</string>
+    <string name="delete_offline_title">ਆਫਲਾਈਨ ਕਾਪੀ ਮਿਟਾਓ</string>
+    <string name="delete_offline_message">ਕੀ ਇਸ ਲੇਖ ਨੂੰ ਆਫਲਾਈਨ ਸਟੋਰੇਜ ਤੋਂ ਹਟਾਉਣਾ ਹੈ?</string>
+    <string name="offline_copy_deleted">ਆਫਲਾਈਨ ਕਾਪੀ ਮਿਟਾ ਦਿੱਤੀ</string>
+    <string name="offline_banner">ਕੋਈ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਨਹੀਂ — ਆਫਲਾਈਨ ਲੇਖ ਦਿਖਾਏ ਜਾ ਰਹੇ ਹਨ</string>
+    <string name="empty_offline">ਕੋਈ ਆਫਲਾਈਨ ਲੇਖ ਨਹੀਂ। ਆਫਲਾਈਨ ਪੜ੍ਹਨ ਲਈ ਲੇਖ ਡਾਊਨਲੋਡ ਕਰੋ।</string>
+    <string name="offline_mode">ਆਫਲਾਈਨ ਮੋਡ</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>

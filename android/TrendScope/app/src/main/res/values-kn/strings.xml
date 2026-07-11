@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ಟ್ರೆಂಡ್ಸ್ಕೋಪ್</string>
+    <string name="tab_categories">ವರ್ಗಗಳು</string>
+    <string name="tab_bookmarks">ಬುಕ್ಮಾರ್ಕ್‌ಗಳು</string>
+    <string name="search_hint">ಲೇಖನಗಳನ್ನು ಹುಡುಕಿ…</string>
+    <string name="today">ಇಂದು</string>
+    <string name="yesterday">ನಿನ್ನೆ</string>
+    <string name="this_week">ಈ ವಾರ</string>
+    <string name="this_month">ಈ ತಿಂಗಳು</string>
+    <string name="earlier">ಹಿಂದೆ</string>
+    <string name="open_original">ಮೂಲ ಲೇಖನ ತೆರೆಯಿರಿ</string>
+    <string name="no_bookmarks">ಇನ್ನೂ ಬುಕ್ಮಾರ್ಕ್‌ಗಳಿಲ್ಲ</string>
+    <string name="bookmarked">ಬುಕ್ಮಾರ್ಕ್ ಮಾಡಲಾಗಿದೆ</string>
+    <string name="removed_bookmark">ಬುಕ್ಮಾರ್ಕ್ ತೆಗೆದುಹಾಕಲಾಗಿದೆ</string>
+    <string name="select_language">ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="language">ಭಾಷೆ</string>
+    <string name="status_starting">ಪ್ರಾರಂಭವಾಗುತ್ತಿದೆ…</string>
+    <string name="status_fetching">ತರಲಾಗುತ್ತಿದೆ</string>
+    <string name="status_downloading_model">ಭಾಷಾ ಮಾದರಿ ಡೌನ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ…</string>
+    <string name="status_translating">ಲೇಖನಗಳನ್ನು ಅನುವಾದಿಸಲಾಗುತ್ತಿದೆ…</string>
+    <string name="status_translating_count">ಅನುವಾದಿಸಲಾಗುತ್ತಿದೆ (%1$d/%2$d)…</string>
+    <string name="translation_complete">ಅನುವಾದ ಪೂರ್ಣ!</string>
+    <string name="translation_partial">ಕೆಲವು ಲೇಖನಗಳನ್ನು ಅನುವಾದಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ</string>
+    <string name="loading_articles">%1$d ಲೇಖನಗಳು ಲೋಡ್ ಆಗಿವೆ</string>
+    <string name="tab_offline">ಆಫ್‌ಲೈನ್</string>
+    <string name="download">ಡೌನ್‌ಲೋಡ್</string>
+    <string name="downloaded">ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗಿದೆ</string>
+    <string name="download_started">ಲೇಖನ ಡೌನ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ…</string>
+    <string name="download_complete">ಡೌನ್‌ಲೋಡ್ ಪೂರ್ಣ</string>
+    <string name="download_failed">ಡೌನ್‌ಲೋಡ್ ವಿಫಲವಾಗಿದೆ</string>
+    <string name="delete_offline_title">ಆಫ್‌ಲೈನ್ ನಕಲನ್ನು ಅಳಿಸಿ</string>
+    <string name="delete_offline_message">ಈ ಲೇಖನವನ್ನು ಆಫ್‌ಲೈನ್ ಸಂಗ್ರಹಣೆಯಿಂದ ತೆಗೆದುಹಾಕಬೇಕೇ?</string>
+    <string name="offline_copy_deleted">ಆಫ್‌ಲೈನ್ ನಕಲು ಅಳಿಸಲಾಗಿದೆ</string>
+    <string name="offline_banner">ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ — ಆಫ್‌ಲೈನ್ ಲೇಖನಗಳನ್ನು ತೋರಿಸಲಾಗುತ್ತಿದೆ</string>
+    <string name="empty_offline">ಯಾವುದೇ ಆಫ್‌ಲೈನ್ ಲೇಖನಗಳಿಲ್ಲ. ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಓದಲು ಲೇಖನಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ.</string>
+    <string name="offline_mode">ಆಫ್‌ಲೈನ್ ಮೋಡ್</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>
