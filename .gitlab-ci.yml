@@ -1,23 +1,26 @@
-image: gradle:8.7-jdk17
+image: openjdk:17
 
 stages:
   - build
 
-variables:
-  GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
-
-cache:
-  paths:
-    - .gradle/
-    - android/TrendScope/.gradle/
+before_script:
+  - apt-get update
+  - apt-get install -y wget unzip
+  - wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+  - mkdir -p /opt/android-sdk/cmdline-tools
+  - unzip commandlinetools-linux-11076708_latest.zip -d /opt/android-sdk/cmdline-tools
+  - mv /opt/android-sdk/cmdline-tools/cmdline-tools /opt/android-sdk/cmdline-tools/latest
+  - export ANDROID_HOME=/opt/android-sdk
+  - export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+  - yes | sdkmanager --licenses
+  - sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
 build_apk:
   stage: build
   script:
     - cd android/TrendScope
-    - chmod +x gradlew || true
+    - chmod +x gradlew
     - ./gradlew assembleDebug
   artifacts:
     paths:
-      - android/TrendScope/app/build/outputs/apk/debug/app-debug.apk
-    expire_in: 30 days
+      - android/TrendScope/app/build/outputs/apk/debug/*.apk
