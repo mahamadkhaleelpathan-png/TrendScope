@@ -7,13 +7,28 @@ build_apk:
     - android
 
   script:
+    - echo "=== Current Directory ==="
+    - Get-Location
+
+    - echo "=== Java Version ==="
+    - java -version
+
+    - echo "=== Gradle Version ==="
     - cd android/TrendScope
+    - .\gradlew.bat --version
+
+    - echo "=== Android SDK ==="
+    - echo $env:ANDROID_HOME
+
     - Set-Content -Path local.properties -Value "sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk"
-    - .\gradlew.bat assembleRelease
-    - New-Item -ItemType Directory -Force -Path "..\..\apk"
-    - Copy-Item "app\build\outputs\apk\release\app-release.apk" "..\..\apk\app-release.apk" -Force
+
+    - echo "=== local.properties ==="
+    - Get-Content local.properties
+
+    - .\gradlew.bat assembleRelease --stacktrace
 
   artifacts:
+    when: always
     paths:
-      - apk/app-release.apk
+      - android/TrendScope/app/build/outputs/apk/release/
     expire_in: 7 days
