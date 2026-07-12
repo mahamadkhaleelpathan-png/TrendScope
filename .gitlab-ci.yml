@@ -10,8 +10,10 @@ build_apk:
     - cd android/TrendScope
     - Set-Content -Path local.properties -Value "sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk"
     - .\gradlew.bat assembleRelease
+    - New-Item -ItemType Directory -Force -Path "..\..\apk"
+    - Copy-Item "app\build\outputs\apk\release\app-release.apk" "..\..\apk\app-release.apk" -Force
 
   artifacts:
     paths:
-      - android/TrendScope/app/build/outputs/apk/release/app-release.apk
+      - apk/app-release.apk
     expire_in: 7 days
