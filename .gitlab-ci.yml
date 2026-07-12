@@ -1,5 +1,6 @@
 stages:
   - build
+  - release
 
 build_apk:
   stage: build
@@ -7,20 +8,41 @@ build_apk:
     - android
 
   script:
-    # Update version automatically
     - powershell -ExecutionPolicy Bypass -File scripts/update-version.ps1
-
-    # Build APK
     - cd android/TrendScope
     - Set-Content -Path local.properties -Value "sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk"
     - .\gradlew.bat assembleRelease
-
-    # Copy APK
     - cd ..\..
     - New-Item -ItemType Directory -Force -Path "apk"
-    - Copy-Item "android\TrendScope\app\build\outputs\apk\release\app-release.apk" "apk\app-release.apk" -Force
+    - Copy-Item "android\TrendScope\app\build\outputs\apk\release\app-release.apk" "apk\TrendScope.apk" -Force
 
   artifacts:
     paths:
-      - apk/app-release.apk
+      - apk/TrendScope.apk
+      - android/TrendScope/app/build.gradle.kts
     expire_in: 7 days
+
+release_github:
+  stage: release
+  tags:
+    - android
+
+  needs:
+    - build_apk
+
+  script:
+    - |
+      $version = (Select-String -Path "android/TrendScope/app/build.gradle.kts" -Pattern 'versionName = "(.*)"').Matches.Groups[1].Value
+
+      Invoke-RestMethod `
+        -Headers @{
+          Authorization = "token $env:GITHUB_TOKEN"
+          Accept = "application/vnd.github+json"
+        } `
+        -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases" `
+        -Method Post `
+        -Body (@{
+          tag_name = "v$version"
+          name = "TrendScope v$version"
+          generate_release_notes = $true
+        } | ConvertTo-Json)
