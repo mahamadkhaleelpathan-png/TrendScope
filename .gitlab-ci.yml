@@ -7,28 +7,35 @@ build_apk:
     - android
 
   script:
-    - echo "=== Current Directory ==="
-    - Get-Location
-
-    - echo "=== Java Version ==="
-    - java -version
-
-    - echo "=== Gradle Version ==="
     - cd android/TrendScope
-    - .\gradlew.bat --version
-
-    - echo "=== Android SDK ==="
-    - echo $env:ANDROID_HOME
-
     - Set-Content -Path local.properties -Value "sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk"
+    - .\gradlew.bat assembleRelease
 
-    - echo "=== local.properties ==="
-    - Get-Content local.properties
+    # Go back to repository root
+    - cd ..\..
 
-    - .\gradlew.bat assembleRelease --stacktrace
+    # Create apk folder
+    - New-Item -ItemType Directory -Force -Path "apk"
+
+    # Copy latest APK
+    - Copy-Item "android\TrendScope\app\build\outputs\apk\release\app-release.apk" "apk\app-release.apk" -Force
+
+    # Configure Git
+    - git config --global user.name "GitLab CI"
+    - git config --global user.email "ci@gitlab.local"
+
+    # Commit only if APK changed
+    - git add apk/app-release.apk
+    - |
+      if (git diff --cached --quiet) {
+        Write-Host "No APK changes to commit."
+      } else {
+        git commit -m "Auto-update release APK [skip ci]"
+        git remote set-url origin "https://oauth2:$env:GITLAB_TOKEN@code.swecha.org/Khaleel/trendscope.git"
+        git push origin HEAD:main
+      }
 
   artifacts:
-    when: always
     paths:
-      - android/TrendScope/app/build/outputs/apk/release/
+      - apk/app-release.apk
     expire_in: 7 days
