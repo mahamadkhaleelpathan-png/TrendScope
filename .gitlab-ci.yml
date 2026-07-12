@@ -7,9 +7,15 @@ build_apk:
     - android
 
   script:
+    # Update version automatically
+    - powershell -ExecutionPolicy Bypass -File scripts/update-version.ps1
+
+    # Build APK
     - cd android/TrendScope
     - Set-Content -Path local.properties -Value "sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk"
     - .\gradlew.bat assembleRelease
+
+    # Copy APK
     - cd ..\..
     - New-Item -ItemType Directory -Force -Path "apk"
     - Copy-Item "android\TrendScope\app\build\outputs\apk\release\app-release.apk" "apk\app-release.apk" -Force
