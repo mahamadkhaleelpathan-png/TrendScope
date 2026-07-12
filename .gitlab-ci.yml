@@ -6,35 +6,33 @@ build_apk:
   tags:
     - android
 
-  script:
-    - cd android/TrendScope
-    - Set-Content -Path local.properties -Value "sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk"
-    - .\gradlew.bat assembleRelease
+ script:
+  - cd android/TrendScope
+  - Set-Content -Path local.properties -Value "sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk"
 
-    # Go back to repository root
-    - cd ..\..
+  - Write-Host "Building APK..."
+  - .\gradlew.bat assembleRelease
 
-    # Create apk folder
-    - New-Item -ItemType Directory -Force -Path "apk"
+  - Write-Host "Returning to project root..."
+  - cd ..\..
 
-    # Copy latest APK
-    - Copy-Item "android\TrendScope\app\build\outputs\apk\release\app-release.apk" "apk\app-release.apk" -Force
+  - Write-Host "Creating apk folder..."
+  - New-Item -ItemType Directory -Force -Path "apk"
 
-    # Configure Git
-    - git config --global user.name "GitLab CI"
-    - git config --global user.email "ci@gitlab.local"
+  - Write-Host "Copying APK..."
+  - Copy-Item "android\TrendScope\app\build\outputs\apk\release\app-release.apk" "apk\app-release.apk" -Force
 
-    # Commit only if APK changed
-    - git add apk/app-release.apk
-    - |
-      if (git diff --cached --quiet) {
-        Write-Host "No APK changes to commit."
-      } else {
-        git commit -m "Auto-update release APK [skip ci]"
-        git remote set-url origin "https://oauth2:$env:GITLAB_TOKEN@code.swecha.org/Khaleel/trendscope.git"
-        git push origin HEAD:main
-      }
+  - Write-Host "Configuring Git..."
+  - git config user.name "GitLab CI"
+  - git config user.email "ci@gitlab.local"
 
+  - Write-Host "Git Status..."
+  - git status
+
+  - git add apk/app-release.apk
+
+  - Write-Host "Cached Changes..."
+  - git diff --cached
   artifacts:
     paths:
       - apk/app-release.apk
