@@ -8,6 +8,9 @@ build_apk:
 
   script:
     - cd android/TrendScope
+    - '@"
+sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk
+"@ | Out-File -Encoding ASCII local.properties'
     - .\gradlew.bat assembleRelease
 
   artifacts:
