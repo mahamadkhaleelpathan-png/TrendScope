@@ -13,8 +13,8 @@ android {
         applicationId = "com.trendscope.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 4
-        versionName = "3.1.1"
+        versionCode = 5
+        versionName = "3.1.2"
         buildConfigField("String", "GNEWS_API_KEY", "\"${project.findProperty("gnewsApiKey") ?: ""}\"")
         buildConfigField("String", "NEWSAPI_KEY", "\"${project.findProperty("newsapiKey") ?: ""}\"")
     }
@@ -96,3 +96,4 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
 }
+
