@@ -34,11 +34,13 @@ release_github:
     - |
       $version = (Select-String -Path "android/TrendScope/app/build.gradle.kts" -Pattern 'versionName = "(.*)"').Matches.Groups[1].Value
 
-      Invoke-RestMethod `
-        -Headers @{
-          Authorization = "token $env:GITHUB_TOKEN"
-          Accept = "application/vnd.github+json"
-        } `
+      $headers = @{
+        Authorization = "token $env:GITHUB_TOKEN"
+        Accept = "application/vnd.github+json"
+      }
+
+      $release = Invoke-RestMethod `
+        -Headers $headers `
         -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases" `
         -Method Post `
         -Body (@{
@@ -46,3 +48,15 @@ release_github:
           name = "TrendScope v$version"
           generate_release_notes = $true
         } | ConvertTo-Json)
+
+      $uploadUrl = $release.upload_url.Replace("{?name,label}","")
+
+      Invoke-RestMethod `
+        -Headers @{
+          Authorization = "token $env:GITHUB_TOKEN"
+          Accept = "application/vnd.github+json"
+          "Content-Type" = "application/vnd.android.package-archive"
+        } `
+        -Uri "$uploadUrl?name=TrendScope.apk" `
+        -Method Post `
+        -InFile "apk/TrendScope.apk"
