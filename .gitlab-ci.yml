@@ -39,15 +39,23 @@ release_github:
         Accept = "application/vnd.github+json"
       }
 
-      $release = Invoke-RestMethod `
-        -Headers $headers `
-        -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases" `
-        -Method Post `
-        -Body (@{
-          tag_name = "v$version"
-          name = "TrendScope v$version"
-          generate_release_notes = $true
-        } | ConvertTo-Json)
+      try {
+        $release = Invoke-RestMethod `
+          -Headers $headers `
+          -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases/tags/v$version" `
+          -Method Get
+      }
+      catch {
+        $release = Invoke-RestMethod `
+          -Headers $headers `
+          -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases" `
+          -Method Post `
+          -Body (@{
+            tag_name = "v$version"
+            name = "TrendScope v$version"
+            generate_release_notes = $true
+          } | ConvertTo-Json)
+      }
 
       $uploadUrl = $release.upload_url.Replace("{?name,label}","")
 
