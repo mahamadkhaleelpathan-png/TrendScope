@@ -41,12 +41,11 @@ release_github:
 
       $repo = "$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY"
 
-      # Check if the release already exists
       try {
           $release = Invoke-RestMethod `
-            -Headers $headers `
-            -Uri "https://api.github.com/repos/$repo/releases/tags/v$version" `
-            -Method Get
+              -Headers $headers `
+              -Uri "https://api.github.com/repos/$repo/releases/tags/v$version" `
+              -Method Get
 
           Write-Host "Existing release found."
 
@@ -55,19 +54,19 @@ release_github:
           Write-Host "Creating new release..."
 
           $release = Invoke-RestMethod `
-            -Headers $headers `
-            -Uri "https://api.github.com/repos/$repo/releases" `
-            -Method Post `
-            -Body (@{
-                tag_name = "v$version"
-                name = "TrendScope v$version"
-                generate_release_notes = $true
-            } | ConvertTo-Json)
+              -Headers $headers `
+              -Uri "https://api.github.com/repos/$repo/releases" `
+              -Method Post `
+              -Body (@{
+                  tag_name = "v$version"
+                  name = "TrendScope v$version"
+                  generate_release_notes = $true
+              } | ConvertTo-Json)
+
       }
 
       $uploadUrl = $release.upload_url.Replace("{?name,label}","")
 
-      # Delete old APK asset if it exists
       $assets = Invoke-RestMethod `
           -Headers $headers `
           -Uri "https://api.github.com/repos/$repo/releases/$($release.id)/assets" `
@@ -92,4 +91,8 @@ release_github:
               Accept = "application/vnd.github+json"
               "Content-Type" = "application/vnd.android.package-archive"
           } `
-          -Uri "$upload
+          -Uri "$uploadUrl?name=TrendScope.apk" `
+          -Method Post `
+          -InFile "apk/TrendScope.apk"
+
+      Write-Host "APK uploaded successfully."
