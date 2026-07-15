@@ -35,36 +35,48 @@ release_github:
       $version = (Select-String -Path "android/TrendScope/app/build.gradle.kts" -Pattern 'versionName = "(.*)"').Matches.Groups[1].Value
 
       $headers = @{
-        Authorization = "token $env:GITHUB_TOKEN"
-        Accept = "application/vnd.github+json"
+          Authorization = "token $env:GITHUB_TOKEN"
+          Accept = "application/vnd.github+json"
       }
 
       try {
-        $release = Invoke-RestMethod `
-          -Headers $headers `
-          -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases/tags/v$version" `
-          -Method Get
+          Write-Host "Checking if release v$version already exists..."
+
+          $release = Invoke-RestMethod `
+              -Headers $headers `
+              -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases/tags/v$version" `
+              -Method Get
+
+          Write-Host "Existing release found."
       }
       catch {
-        $release = Invoke-RestMethod `
-          -Headers $headers `
-          -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases" `
-          -Method Post `
-          -Body (@{
-            tag_name = "v$version"
-            name = "TrendScope v$version"
-            generate_release_notes = $true
-          } | ConvertTo-Json)
+          Write-Host "Release not found. Creating a new release..."
+
+          $release = Invoke-RestMethod `
+              -Headers $headers `
+              -Uri "https://api.github.com/repos/$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY/releases" `
+              -Method Post `
+              -Body (@{
+                  tag_name = "v$version"
+                  name = "TrendScope v$version"
+                  generate_release_notes = $true
+              } | ConvertTo-Json)
+
+          Write-Host "Release created."
       }
 
       $uploadUrl = $release.upload_url.Replace("{?name,label}","")
 
+      Write-Host "Uploading APK..."
+
       Invoke-RestMethod `
-        -Headers @{
-          Authorization = "token $env:GITHUB_TOKEN"
-          Accept = "application/vnd.github+json"
-          "Content-Type" = "application/vnd.android.package-archive"
-        } `
-        -Uri "$uploadUrl?name=TrendScope.apk" `
-        -Method Post `
-        -InFile "apk/TrendScope.apk"
+          -Headers @{
+              Authorization = "token $env:GITHUB_TOKEN"
+              Accept = "application/vnd.github+json"
+              "Content-Type" = "application/vnd.android.package-archive"
+          } `
+          -Uri "$uploadUrl?name=TrendScope.apk" `
+          -Method Post `
+          -InFile "apk/TrendScope.apk"
+
+      Write-Host "APK uploaded successfully."
