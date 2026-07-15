@@ -1,23 +1,37 @@
-$file = "android/TrendScope/app/build.gradle.kts"
+$buildFile = "android/TrendScope/app/build.gradle.kts"
 
-$content = Get-Content $file -Raw
+$content = Get-Content $buildFile -Raw
 
-if ($content -match 'versionCode\s*=\s*(\d+)') {
-    $versionCode = [int]$matches[1] + 1
-    $content = $content -replace 'versionCode\s*=\s*\d+', "versionCode = $versionCode"
-}
+# Read current versionCode
+$versionCodeMatch = [regex]::Match($content, 'versionCode\s*=\s*(\d+)')
+$versionCode = [int]$versionCodeMatch.Groups[1].Value
 
-if ($content -match 'versionName\s*=\s*"(\d+)\.(\d+)\.(\d+)"') {
-    $major = [int]$matches[1]
-    $minor = [int]$matches[2]
-    $patch = [int]$matches[3] + 1
+# Read current versionName
+$versionNameMatch = [regex]::Match($content, 'versionName\s*=\s*"(\d+)\.(\d+)\.(\d+)"')
 
-    $newVersion = "$major.$minor.$patch"
+$major = [int]$versionNameMatch.Groups[1].Value
+$minor = [int]$versionNameMatch.Groups[2].Value
+$patch = [int]$versionNameMatch.Groups[3].Value
 
-    $content = $content -replace 'versionName\s*=\s*".*"', "versionName = `"$newVersion`""
-}
+# Increment versions
+$versionCode++
+$patch++
 
-Set-Content $file $content
+$newVersionName = "$major.$minor.$patch"
 
+$content = [regex]::Replace(
+    $content,
+    'versionCode\s*=\s*\d+',
+    "versionCode = $versionCode"
+)
+
+$content = [regex]::Replace(
+    $content,
+    'versionName\s*=\s*"\d+\.\d+\.\d+"',
+    "versionName = `"$newVersionName`""
+)
+
+Set-Content $buildFile $content
+
+Write-Host "Updated versionName to $newVersionName"
 Write-Host "Updated versionCode to $versionCode"
-Write-Host "Updated versionName to $newVersion"
