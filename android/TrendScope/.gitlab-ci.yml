@@ -1,27 +1,3 @@
-stages:
-  - build
-  - release
-
-build_apk:
-  stage: build
-  tags:
-    - android
-
-  script:
-    - powershell -ExecutionPolicy Bypass -File scripts/update-version.ps1
-    - cd android/TrendScope
-    - Set-Content -Path local.properties -Value "sdk.dir=C:\\Users\\Khaleel Pathan\\AppData\\Local\\Android\\Sdk"
-    - .\gradlew.bat assembleRelease
-    - cd ..\..
-    - New-Item -ItemType Directory -Force -Path "apk"
-    - Copy-Item "android\TrendScope\app\build\outputs\apk\release\app-release.apk" "apk\TrendScope.apk" -Force
-
-  artifacts:
-    paths:
-      - apk/TrendScope.apk
-      - android/TrendScope/app/build.gradle.kts
-    expire_in: 7 days
-
 release_github:
   stage: release
   tags:
@@ -32,78 +8,86 @@ release_github:
 
   script:
     - |
+      $ErrorActionPreference = "Stop"
+
       $version = (Select-String -Path "android/TrendScope/app/build.gradle.kts" -Pattern 'versionName = "(.*)"').Matches.Groups[1].Value
 
       Write-Host "Version: $version"
       Write-Host "Username: '$env:GITHUB_USERNAME'"
       Write-Host "Repository: '$env:GITHUB_REPOSITORY'"
-      Write-Host "Token Present: $([string]::IsNullOrWhiteSpace($env:GITHUB_TOKEN) -eq $false)"
+      Write-Host "Token Present: $(-not [string]::IsNullOrWhiteSpace($env:GITHUB_TOKEN))"
 
       $repo = "$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY"
 
       Write-Host "Repo: '$repo'"
-      Write-Host "Release URL: https://api.github.com/repos/$repo/releases"
 
       $headers = @{
-          Authorization = "token $env:GITHUB_TOKEN"
-          Accept = "application/vnd.github+json"
+        Authorization = "token $env:GITHUB_TOKEN"
+        Accept        = "application/vnd.github+json"
       }
 
       try {
-          $release = Invoke-RestMethod `
-              -Headers $headers `
-              -Uri "https://api.github.com/repos/$repo/releases/tags/v$version" `
-              -Method Get
+        $release = Invoke-RestMethod `
+          -Headers $headers `
+          -Uri "https://api.github.com/repos/$repo/releases/tags/v$version" `
+          -Method Get
 
-          Write-Host "Existing release found."
+        Write-Host "Existing release found."
+      }
+      catch {
+        Write-Host "Creating new release..."
 
-      } catch {
-
-          Write-Host "Creating new release..."
-
-          $release = Invoke-RestMethod `
-              -Headers $headers `
-              -Uri "https://api.github.com/repos/$repo/releases" `
-              -Method Post `
-              -Body (@{
-                  tag_name = "v$version"
-                  name = "TrendScope v$version"
-                  generate_release_notes = $true
-              } | ConvertTo-Json)
-
+        $release = Invoke-RestMethod `
+          -Headers $headers `
+          -Uri "https://api.github.com/repos/$repo/releases" `
+          -Method Post `
+          -ContentType "application/json" `
+          -Body (@{
+              tag_name = "v$version"
+              name = "TrendScope v$version"
+              generate_release_notes = $true
+          } | ConvertTo-Json)
       }
 
-      $uploadUrl = $release.upload_url.Replace("{?name,label}","")
-
       Write-Host "Release ID: $($release.id)"
-      Write-Host "Upload URL: '$uploadUrl'"
+      Write-Host "Raw Upload URL: $($release.upload_url)"
+
+      $uploadUrl = $release.upload_url -replace '\{\?name,label\}', ''
+
+      Write-Host "Clean Upload URL: $uploadUrl"
+
+      if (-not ($uploadUrl -match '^https://')) {
+          throw "Invalid upload URL: $uploadUrl"
+      }
 
       $assets = Invoke-RestMethod `
-          -Headers $headers `
-          -Uri "https://api.github.com/repos/$repo/releases/$($release.id)/assets" `
-          -Method Get
+        -Headers $headers `
+        -Uri "https://api.github.com/repos/$repo/releases/$($release.id)/assets" `
+        -Method Get
 
       $oldAsset = $assets | Where-Object { $_.name -eq "TrendScope.apk" }
 
       if ($oldAsset) {
-          Write-Host "Deleting old APK..."
+        Write-Host "Deleting old APK..."
 
-          Invoke-RestMethod `
-              -Headers $headers `
-              -Uri "https://api.github.com/repos/$repo/releases/assets/$($oldAsset.id)" `
-              -Method Delete
+        Invoke-RestMethod `
+          -Headers $headers `
+          -Uri "https://api.github.com/repos/$repo/releases/assets/$($oldAsset.id)" `
+          -Method Delete
       }
 
-      Write-Host "Uploading APK..."
+      $finalUploadUrl = "${uploadUrl}?name=TrendScope.apk"
+
+      Write-Host "Final Upload URL: $finalUploadUrl"
 
       Invoke-RestMethod `
-          -Headers @{
-              Authorization = "token $env:GITHUB_TOKEN"
-              Accept = "application/vnd.github+json"
-              "Content-Type" = "application/vnd.android.package-archive"
-          } `
-          -Uri "$uploadUrl?name=TrendScope.apk" `
-          -Method Post `
-          -InFile "apk/TrendScope.apk"
+        -Headers @{
+          Authorization = "token $env:GITHUB_TOKEN"
+          Accept = "application/vnd.github+json"
+          "Content-Type" = "application/vnd.android.package-archive"
+        } `
+        -Uri $finalUploadUrl `
+        -Method Post `
+        -InFile "apk/TrendScope.apk"
 
       Write-Host "APK uploaded successfully."
