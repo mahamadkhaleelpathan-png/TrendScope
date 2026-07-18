@@ -62,22 +62,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_language -> {
-                    showTranslationDialog()
-                    true
-                }
-                R.id.action_search -> {
-                    showAdvancedSearchDialog()
-                    true
-                }
-                R.id.action_theme -> {
-                    toggleTheme()
-                    true
-                }
-                else -> false
-            }
+    when (item.itemId) {
+        R.id.action_language -> {
+            showTranslationDialog()
+            true
         }
+        R.id.action_theme -> {
+            toggleTheme()
+            true
+        }
+        else -> false
+    }
+}
 
         updateOfflineBanner()
     }
