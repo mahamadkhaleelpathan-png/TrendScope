@@ -34,12 +34,20 @@ release_github:
     - |
       $version = (Select-String -Path "android/TrendScope/app/build.gradle.kts" -Pattern 'versionName = "(.*)"').Matches.Groups[1].Value
 
-      $headers = @{
-        Authorization = "token $env:GITHUB_TOKEN"
-        Accept = "application/vnd.github+json"
-      }
+      Write-Host "Version: $version"
+      Write-Host "Username: '$env:GITHUB_USERNAME'"
+      Write-Host "Repository: '$env:GITHUB_REPOSITORY'"
+      Write-Host "Token Present: $([string]::IsNullOrWhiteSpace($env:GITHUB_TOKEN) -eq $false)"
 
       $repo = "$env:GITHUB_USERNAME/$env:GITHUB_REPOSITORY"
+
+      Write-Host "Repo: '$repo'"
+      Write-Host "Release URL: https://api.github.com/repos/$repo/releases"
+
+      $headers = @{
+          Authorization = "token $env:GITHUB_TOKEN"
+          Accept = "application/vnd.github+json"
+      }
 
       try {
           $release = Invoke-RestMethod `
@@ -66,8 +74,9 @@ release_github:
       }
 
       $uploadUrl = $release.upload_url.Replace("{?name,label}","")
+
       Write-Host "Release ID: $($release.id)"
-      Write-Host "Upload URL: $uploadUrl"
+      Write-Host "Upload URL: '$uploadUrl'"
 
       $assets = Invoke-RestMethod `
           -Headers $headers `
