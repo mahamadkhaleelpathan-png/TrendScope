@@ -1,8 +1,7 @@
 ﻿import os
-import webbrowser
 from pdf_opener import open_pdf
 from urllib.parse import quote
-from viewer import show_articles
+from viewer import show_articles, generate_news_pdf
 import tkinter as tk
 from datetime import datetime, timedelta
 from synapse.pipelines.supervisor import run_weekly_pipeline
@@ -102,9 +101,11 @@ class TrendScopeUI:
         btn_row = tk.Frame(center_panel, bg=BG_PANEL)
         btn_row.pack(fill="x", padx=20, pady=(10, 5))
         self.gen_btn = tk.Button(btn_row, text="GENERATE PDF", font=("Helvetica", 11, "bold"), bg=ACCENT, fg="white", bd=0, pady=10, cursor="hand2", command=self.start_generation)
-        self.gen_btn.pack(side="left", expand=True, fill="x", padx=(0,5))
+        self.gen_btn.pack(side="left", expand=True, fill="x", padx=(0,2))
         self.pdf_btn = tk.Button(btn_row, text="OPEN PDF", font=("Helvetica", 11, "bold"), bg="#334155", fg="white", bd=0, pady=10, cursor="hand2", command=open_pdf)
-        self.pdf_btn.pack(side="right", expand=True, fill="x", padx=(5,0))
+        self.pdf_btn.pack(side="left", expand=True, fill="x", padx=(2,2))
+        self.dl_btn = tk.Button(btn_row, text="DOWNLOAD PDF", font=("Helvetica", 11, "bold"), bg="#16a34a", fg="white", bd=0, pady=10, cursor="hand2", command=self.download_pdf)
+        self.dl_btn.pack(side="right", expand=True, fill="x", padx=(2,0))
         tk.Label(center_panel, text="GENERATED ARTICLES", font=("Helvetica", 10, "bold"), bg=BG_PANEL, fg=TEXT_SUB).pack(anchor="w", padx=20, pady=(10,2))
         self.article_box = tk.Text(center_panel, font=("Helvetica", 9), bg="#0f172a", fg=TEXT_MAIN, bd=0, highlightthickness=1, highlightcolor=ACCENT, state="disabled", wrap="word", cursor="arrow")
         self.article_box.pack(fill="both", expand=True, padx=20, pady=(0,15))
@@ -125,12 +126,38 @@ class TrendScopeUI:
 
 
     def open_latest_pdf(self):
-        folder = 'data'
-        if not os.path.exists(folder): return
-        pdfs = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith('.pdf')]
+        import subprocess
+        project_dir = os.path.dirname(os.path.abspath(__file__))
+        data_dir = os.path.join(project_dir, "data")
+        if not os.path.exists(data_dir): return
+        pdfs = [os.path.join(data_dir, f) for f in os.listdir(data_dir) if f.endswith('.pdf')]
         if not pdfs: return
         latest = max(pdfs, key=os.path.getctime)
-        webbrowser.open('file:///' + os.path.abspath(latest).replace(chr(92), '/'))
+        subprocess.Popen(["xdg-open", latest])
+
+    def download_pdf(self):
+        import shutil, tkinter.filedialog as fd, tkinter.messagebox as mb
+        project_dir = os.path.dirname(os.path.abspath(__file__))
+        data_dir = os.path.join(project_dir, "data")
+        if not os.path.exists(data_dir):
+            mb.showinfo("No PDF", "Generate a PDF first!")
+            return
+        pdfs = [os.path.join(data_dir, f) for f in os.listdir(data_dir) if f.endswith('.pdf')]
+        if not pdfs:
+            mb.showinfo("No PDF", "Generate a PDF first!")
+            return
+        latest = max(pdfs, key=os.path.getctime)
+        dest = fd.asksaveasfilename(
+            initialdir=os.path.expanduser("~/Downloads"),
+            initialfile=os.path.basename(latest),
+            defaultextension=".pdf",
+            filetypes=[("PDF Files", "*.pdf")],
+            title="Save PDF As"
+        )
+        if dest:
+            shutil.copy2(latest, dest)
+            self.add_log(f"PDF saved to: {dest}", SUCCESS)
+            mb.showinfo("Downloaded", f"PDF saved to:\n{dest}")
 
     def clear_placeholder(self, event):
         if "e.g.," in self.search_entry.get():
@@ -173,8 +200,12 @@ class TrendScopeUI:
         try:
             articles = run_weekly_pipeline(dates=dates, feeds=[feed_url])
             show_articles(self.article_box, self.add_log, articles)
-            self.open_latest_pdf()
-            self.add_log("âœ… PDF generated successfully!", SUCCESS)
+            if articles:
+                generate_news_pdf(articles, self.selected_main, self.selected_sub or "")
+                self.open_latest_pdf()
+                self.add_log(f"PDF generated ({len(articles)} articles)!", SUCCESS)
+            else:
+                self.add_log("No articles found.", YELLOW)
             self.gen_btn.config(text="âš¡  GENERATE PDF", bg=ACCENT)
         except Exception as e:
             self.add_log(f"âŒ Error: {str(e)[:40]}", DANGER)
